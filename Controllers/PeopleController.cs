@@ -8,20 +8,25 @@ namespace CorePersonApi.Controllers
     [Route("api/[controller]")]
     public class PeopleController : Controller
     {
-        List<Person> people = People.GetPeople();
+        private IPeopleProvider provider;
+
+        public PeopleController(IPeopleProvider peopleProvider)
+        {
+            provider = peopleProvider;
+        }
 
         // GET api/<controller>
         [HttpGet]
         public IEnumerable<Person> Get()
         {
-            return people;
+            return provider.GetPeople();
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public Person Get(int id)
         {
-            return People.GetPeople().FirstOrDefault(p => p.Id == id);
+            return provider.GetPeople().FirstOrDefault(p => p.Id == id);
         }
     }
 }

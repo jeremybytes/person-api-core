@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace CorePersonApi.Models
 {
-    public static class People
+    public class StaticPeopleProvider : IPeopleProvider
     {
-        public static List<Person> GetPeople()
+        public List<Person> GetPeople()
         {
             var p = new List<Person>()
             {
